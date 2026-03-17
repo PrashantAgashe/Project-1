@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact – BAGORA</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+<div id="page-loader">
+  <div class="loader-logo">BAGORA</div>
+  <div class="loader-tagline">Premium Bags &amp; Accessories</div>
+  <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+</div>
+
+<header>
+  <div class="header-top">
+    <a href="index.html" class="logo">
+      <div class="logo-name">BAGORA</div>
+      <div class="logo-tag">Premium Bags &amp; Accessories</div>
+    </a>
+    <div class="header-right">
+      <div class="search-bar">
+        <input type="text" id="search-input" placeholder="Search bags…"/>
+        <button id="search-btn">🔍 Search</button>
+      </div>
+      <a href="wishlist.html" class="cart-btn wish-btn"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style="flex-shrink:0"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg> Wishlist <span class="wish-count wish-badge">0</span></a><a href="cart.html" class="cart-btn">🛍 Cart <span class="cart-count">0</span></a>
+    </div>
+  </div>
+</header>
+<nav>
+  <a href="index.html">Home</a>
+  <a href="products.html">Products</a>
+  <a href="wishlist.html" class="nav-wish">Wishlist</a>
+  <a href="about.html">About</a>
+  <a href="contact.html">Contact</a>
+  <a href="login.html">Login</a>
+  <a href="register.html">Register</a>
+</nav>
+<div id="search-results"><div class="search-box"><button class="search-close" onclick="document.getElementById('search-results').classList.remove('open')">✕</button><div id="search-result-box"></div></div></div>
+
+<main>
+  <div class="page-banner">
+    <h1>Contact Us</h1>
+    <p>We'd love to hear from you — reach out anytime</p>
+  </div>
+
+  <div class="contact-wrap">
+
+    <!-- CONTACT FORM -->
+    <div>
+      <div class="form-wrap" style="margin:0;max-width:100%">
+        <h2>Send a Message</h2>
+        <p class="sub">Fill in the form below and we'll get back to you within 24 hours.</p>
+
+        <div class="success-msg" id="success-msg">✓ Message sent! We'll reply to you shortly.</div>
+
+        <div class="form-group">
+          <label>Your Name *</label>
+          <input type="text" id="c-name" placeholder="Prashant Agashe"/>
+          <div class="error-msg" id="err-name">Name is required.</div>
+        </div>
+
+        <div class="form-group">
+          <label>Email Address *</label>
+          <input type="email" id="c-email" placeholder="you@example.com"/>
+          <div class="error-msg" id="err-email">Please enter a valid email.</div>
+        </div>
+
+        <div class="form-group">
+          <label>Subject</label>
+          <input type="text" id="c-subject" placeholder="Order inquiry, product question, etc."/>
+        </div>
+
+        <div class="form-group">
+          <label>Message *</label>
+          <textarea id="c-msg" placeholder="Write your message here…"></textarea>
+          <div class="error-msg" id="err-msg">Message cannot be empty.</div>
+        </div>
+
+        <button class="btn btn-brown" style="width:100%;padding:12px;font-size:14px;" onclick="handleContact()">Send Message →</button>
+      </div>
+    </div>
+
+    <!-- CONTACT INFO -->
+    <div class="contact-info">
+      <h3>Get In Touch</h3>
+      <p>Have a question about an order, a product, or anything else? Our team is ready to help!</p>
+
+      <div class="ci">
+        <span>📍</span>
+        <div>
+          <strong style="display:block;font-size:14px;margin-bottom:2px;">Store Address</strong>
+          <span style="font-size:13px;color:#666;line-height:1.6;">BAGORA Store, Plot 42, Sector 12,<br>Gandhinagar, Gujarat – 382012, India</span>
+        </div>
+      </div>
+
+      <div class="ci">
+        <span>📞</span>
+        <div>
+          <strong style="display:block;font-size:14px;margin-bottom:2px;">Phone</strong>
+          <span style="font-size:13px;color:#666;">+91 98765 43210<br>+91 79 2345 6789</span>
+        </div>
+      </div>
+
+      <div class="ci">
+        <span>📧</span>
+        <div>
+          <strong style="display:block;font-size:14px;margin-bottom:2px;">Email</strong>
+          <span style="font-size:13px;color:#666;">support@bagora.in<br>orders@bagora.in</span>
+        </div>
+      </div>
+
+      <div class="ci">
+        <span>🕐</span>
+        <div>
+          <strong style="display:block;font-size:14px;margin-bottom:2px;">Business Hours</strong>
+          <span style="font-size:13px;color:#666;">Monday – Saturday: 9 AM – 7 PM<br>Sunday: 10 AM – 4 PM</span>
+        </div>
+      </div>
+
+      <!-- SOCIAL -->
+      <div style="margin-top:20px;">
+        <strong style="font-size:13px;display:block;margin-bottom:10px;color:var(--brown);">Follow Us:</strong>
+        <div style="display:flex;gap:10px;">
+          <a href="#" style="background:var(--brown);color:#fff;padding:8px 14px;border-radius:4px;font-size:13px;font-weight:500;">📷 Instagram</a>
+          <a href="#" style="background:var(--brown);color:#fff;padding:8px 14px;border-radius:4px;font-size:13px;font-weight:500;">👍 Facebook</a>
+        </div>
+      </div>
+
+      <!-- MAP PLACEHOLDER -->
+      <div style="margin-top:24px;background:var(--light);border:1px solid var(--border);border-radius:6px;padding:30px;text-align:center;color:#999;">
+        <div style="font-size:32px;margin-bottom:8px;">🗺️</div>
+        <p style="font-size:13px;">Gandhinagar, Gujarat, India</p>
+        <a href="https://maps.google.com" target="_blank" style="font-size:12px;color:var(--brown2);">Open in Google Maps →</a>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo-name">BAGORA</div>
+      <div class="logo-tag" style="margin-bottom:10px">Premium Bags &amp; Accessories</div>
+      <p>Your one-stop shop for premium bags.</p>
+    </div>
+    <div><h4>Quick Links</h4><a href="index.html">Home</a><a href="products.html">Products</a>
+  <a href="wishlist.html" class="nav-wish">Wishlist</a><a href="about.html">About</a><a href="contact.html">Contact</a></div>
+    <div><h4>Contact Info</h4><p>📍 Gandhinagar, Gujarat – 382012</p><p>📞 +91 98765 43210</p><p>📧 support@bagora.in</p></div>
+  </div>
+  <div class="footer-bottom">© 2026 BAGORA – All Rights Reserved</div>
+</footer>
+
+<script src="main.js"></script>
+<script>
+function handleContact() {
+  let valid = true;
+  const name = document.getElementById('c-name').value.trim();
+  const email = document.getElementById('c-email').value.trim();
+  const msg   = document.getElementById('c-msg').value.trim();
+
+  document.getElementById('err-name').style.display  = !name  ? 'block' : 'none';
+  document.getElementById('err-email').style.display = !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) ? 'block' : 'none';
+  document.getElementById('err-msg').style.display   = !msg   ? 'block' : 'none';
+
+  if (!name)  valid = false;
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) valid = false;
+  if (!msg)   valid = false;
+
+  if (valid) {
+    document.getElementById('success-msg').style.display = 'block';
+    document.getElementById('c-name').value  = '';
+    document.getElementById('c-email').value = '';
+    document.getElementById('c-subject').value = '';
+    document.getElementById('c-msg').value   = '';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+}
+</script>
+</body>
+</html>

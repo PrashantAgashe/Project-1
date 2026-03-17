@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BAGORA – Premium Bags & Accessories</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet"/>
+  <style>
+
+    /* ══════════════════════════════════════════
+       HOME PAGE STYLES
+    ══════════════════════════════════════════ */
+
+    /* ── HERO ── */
+    .home-hero {
+      min-height: 96vh;
+      background: linear-gradient(135deg, #1a0800 0%, #3B1505 30%, #6B2F0A 65%, #9B5523 100%);
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden; padding: 90px 24px 60px;
+    }
+
+    /* Animated background circles */
+    .hero-orb {
+      position: absolute; border-radius: 50%;
+      filter: blur(80px); pointer-events: none;
+    }
+    .hero-orb-1 { width:500px;height:500px;background:#C8860A;opacity:0.18;top:-150px;right:-100px;animation:orbFloat 10s ease-in-out infinite alternate; }
+    .hero-orb-2 { width:340px;height:340px;background:#fff3cd;opacity:0.10;bottom:-100px;left:-60px;animation:orbFloat 12s 2s ease-in-out infinite alternate; }
+    .hero-orb-3 { width:200px;height:200px;background:#e8a020;opacity:0.12;top:40%;left:35%;animation:orbFloat 8s 1s ease-in-out infinite alternate; }
+    @keyframes orbFloat { from{transform:translate(0,0)scale(1)}to{transform:translate(30px,20px)scale(1.12)} }
+
+    /* Dot grid */
+    .hero-dots {
+      position:absolute;inset:0;
+      background-image:radial-gradient(circle,rgba(255,255,255,0.055) 1.5px,transparent 1.5px);
+      background-size:32px 32px; pointer-events:none;
+    }
+
+    /* Diagonal stripe overlay */
+    .hero-stripe {
+      position:absolute;inset:0;pointer-events:none;
+      background:repeating-linear-gradient(
+        45deg,transparent,transparent 80px,
+        rgba(255,255,255,0.012) 80px,rgba(255,255,255,0.012) 82px
+      );
+    }
+
+    .hero-inner {
+      position:relative;z-index:2;
+      display:grid;grid-template-columns:1fr 1fr;
+      gap:56px;max-width:1140px;width:100%;align-items:center;
+    }
+
+    /* Left side */
+    .hero-left {}
+
+    .hero-label {
+      display:inline-flex;align-items:center;gap:8px;
+      background:rgba(200,134,10,0.18);
+      border:1px solid rgba(200,134,10,0.4);
+      color:#ffd87a;font-size:11px;font-weight:700;
+      letter-spacing:2.5px;text-transform:uppercase;
+      padding:7px 18px;border-radius:50px;
+      margin-bottom:24px;
+      animation:heroIn 0.8s ease both;
+    }
+    .hero-label-dot {
+      width:6px;height:6px;border-radius:50%;
+      background:#ffd87a;animation:dotPulse 1.5s ease infinite;
+    }
+    @keyframes dotPulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.7)} }
+
+    .hero-h1 {
+      font-family:'Playfair Display',Georgia,serif;
+      font-size:clamp(38px,5.5vw,72px);
+      font-weight:900;color:#fff;
+      line-height:1.05;margin-bottom:22px;
+      animation:heroIn 0.8s 0.1s ease both;
+    }
+    .hero-h1 em { font-style:italic;color:#ffd87a;display:block; }
+    .hero-h1 .line3 { font-size:0.62em;font-weight:400;color:rgba(255,255,255,0.65);font-style:normal;font-family:'Poppins',sans-serif;letter-spacing:1px;display:block;margin-top:4px;font-size:clamp(14px,2vw,20px); }
+
+    .hero-p {
+      font-size:15px;color:rgba(255,255,255,0.68);line-height:1.85;
+      max-width:430px;margin-bottom:34px;font-weight:300;
+      animation:heroIn 0.8s 0.2s ease both;
+    }
+
+    .hero-btns { display:flex;gap:12px;flex-wrap:wrap;margin-bottom:38px;animation:heroIn 0.8s 0.3s ease both; }
+
+    .hbtn-main {
+      background:#C8860A;color:#fff;
+      padding:14px 32px;font-weight:700;font-size:14px;
+      border:none;border-radius:5px;cursor:pointer;
+      letter-spacing:0.3px;transition:all 0.22s;
+      font-family:'Poppins',sans-serif;display:inline-block;
+      box-shadow:0 6px 20px rgba(200,134,10,0.4);
+    }
+    .hbtn-main:hover { background:#a06d08;transform:translateY(-2px);box-shadow:0 10px 28px rgba(200,134,10,0.5); }
+
+    .hbtn-wish {
+      background:rgba(229,62,62,0.15);color:#ffb3b3;
+      padding:14px 28px;font-weight:600;font-size:14px;
+      border:1.5px solid rgba(229,62,62,0.5);border-radius:5px;cursor:pointer;
+      letter-spacing:0.3px;transition:all 0.22s;
+      font-family:'Poppins',sans-serif;display:inline-flex;align-items:center;gap:7px;
+    }
+    .hbtn-wish:hover { background:rgba(229,62,62,0.28);border-color:#e53e3e;color:#fff; }
+
+    .hbtn-outline2 {
+      background:transparent;color:rgba(255,255,255,0.75);
+      padding:14px 28px;font-weight:500;font-size:14px;
+      border:1.5px solid rgba(255,255,255,0.3);border-radius:5px;cursor:pointer;
+      transition:all 0.22s;font-family:'Poppins',sans-serif;display:inline-block;
+    }
+    .hbtn-outline2:hover { border-color:rgba(255,255,255,0.7);color:#fff;background:rgba(255,255,255,0.07); }
+
+    /* Hero stats */
+    .hero-stats {
+      display:flex;gap:0;border-top:1px solid rgba(255,255,255,0.1);
+      padding-top:28px;animation:heroIn 0.8s 0.4s ease both;
+    }
+    .hs-item {
+      flex:1;text-align:center;position:relative;
+    }
+    .hs-item+.hs-item::before {
+      content:'';position:absolute;left:0;top:20%;height:60%;
+      width:1px;background:rgba(255,255,255,0.12);
+    }
+    .hs-num { font-size:clamp(22px,3vw,30px);font-weight:800;color:#ffd87a;line-height:1; }
+    .hs-lbl { font-size:10px;color:rgba(255,255,255,0.42);letter-spacing:1.5px;text-transform:uppercase;margin-top:4px; }
+
+    /* Right side: floating product preview */
+    .hero-visual { animation:heroIn 0.8s 0.15s ease both; }
+
+    .hero-cards-row { display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px; }
+
+    .hero-card {
+      background:rgba(255,255,255,0.08);
+      border:1px solid rgba(255,255,255,0.15);
+      border-radius:16px;padding:18px 14px;
+      text-align:center;backdrop-filter:blur(16px);
+      cursor:pointer;transition:transform 0.25s,background 0.25s,border-color 0.25s;
+      position:relative;overflow:hidden;
+    }
+    .hero-card::before {
+      content:'';position:absolute;inset:0;
+      background:linear-gradient(135deg,rgba(255,255,255,0.06) 0%,transparent 100%);
+      pointer-events:none;
+    }
+    .hero-card:hover { background:rgba(255,255,255,0.16);transform:translateY(-6px);border-color:rgba(200,134,10,0.5); }
+    .hc-cat   { font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:8px; }
+    .hc-svg   { margin:0 auto 10px;display:flex;justify-content:center; }
+    .hc-name  { font-size:12px;font-weight:600;color:#fff;margin-bottom:5px; }
+    .hc-price { font-size:13px;font-weight:700;color:#ffd87a; }
+    .hc-badge { position:absolute;top:10px;right:10px;background:#C8860A;color:#fff;font-size:8px;font-weight:700;padding:2px 7px;border-radius:20px;letter-spacing:0.5px; }
+
+    /* Heart icon on hero card */
+    .hc-heart {
+      position:absolute;top:10px;left:10px;
+      background:rgba(229,62,62,0.2);border:1px solid rgba(229,62,62,0.4);
+      border-radius:50%;width:26px;height:26px;
+      display:flex;align-items:center;justify-content:center;
+      font-size:12px;cursor:pointer;transition:all 0.2s;
+    }
+    .hc-heart:hover { background:rgba(229,62,62,0.7); }
+
+    .hero-wide-card {
+      background:rgba(255,255,255,0.08);
+      border:1px solid rgba(255,255,255,0.13);
+      border-radius:14px;padding:13px 16px;
+      display:flex;align-items:center;gap:12px;
+      backdrop-filter:blur(16px);cursor:pointer;
+      transition:transform 0.25s,background 0.25s;margin-bottom:11px;
+    }
+    .hero-wide-card:hover { background:rgba(255,255,255,0.16);transform:translateY(-3px); }
+    .hwc-name  { font-size:13px;font-weight:600;color:#fff; }
+    .hwc-cat   { font-size:10px;color:rgba(255,255,255,0.4);margin-top:2px; }
+    .hwc-price { font-size:14px;font-weight:700;color:#ffd87a;white-space:nowrap; }
+    .hwc-heart { font-size:14px;cursor:pointer;padding:4px;margin-left:2px; }
+
+    @keyframes heroIn { from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:translateY(0)} }
+
+    /* ── TICKER ── */
+    .ticker { background:linear-gradient(90deg,#C8860A,#a06d08,#C8860A);padding:12px 0;overflow:hidden;white-space:nowrap; }
+    .ticker-inner { display:inline-block;animation:ticker 28s linear infinite; }
+    .ticker span { font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:#fff;padding:0 26px; }
+    .ticker-dot { color:rgba(255,255,255,0.4) !important; }
+    @keyframes ticker { from{transform:translateX(0)}to{transform:translateX(-50%)} }
+
+    /* ── CATEGORIES ── */
+    .home-cats { padding:70px 32px;background:#fff; }
+    .cats-grid {
+      display:grid;grid-template-columns:repeat(5,1fr);gap:16px;
+      max-width:1100px;margin:0 auto;
+    }
+    .cat-chip {
+      display:flex;flex-direction:column;align-items:center;gap:10px;
+      padding:26px 12px 20px;border:2px solid #eee;border-radius:18px;
+      cursor:pointer;transition:all 0.25s;text-decoration:none;color:var(--text);
+      background:#fafafa;position:relative;overflow:hidden;
+    }
+    .cat-chip::after {
+      content:'';position:absolute;bottom:0;left:0;right:0;height:3px;
+      background:linear-gradient(90deg,var(--brown),var(--gold));
+      transform:scaleX(0);transform-origin:left;transition:transform 0.3s;
+    }
+    .cat-chip:hover::after { transform:scaleX(1); }
+    .cat-chip:hover { border-color:var(--brown2);transform:translateY(-5px);box-shadow:0 10px 28px rgba(92,45,14,0.14);background:#fff; }
+    .cat-chip .ci { width:64px;height:64px;background:var(--light);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;transition:background 0.25s,transform 0.25s; }
+    .cat-chip:hover .ci { background:var(--brown);transform:scale(1.08) rotate(-4deg); }
+    .cat-chip strong { font-size:12px;font-weight:700;text-align:center; }
+    .cat-chip small  { font-size:10px;color:var(--gray); }
+
+    /* ── SECTION HEADER ── */
+    .sec-hdr { text-align:center;margin-bottom:40px; }
+    .sec-hdr p { font-size:13px;color:var(--gray);margin-top:7px; }
+
+    /* ── FEATURED SECTION ── */
+    .feat-section { padding:70px 32px;background:var(--cream); }
+
+    /* ── NEW ARRIVAL BANNER ── */
+    .arrival-banner {
+      margin:0 32px 0;
+      background:linear-gradient(135deg,#1a0800 0%,#3B1505 50%,#6B2F0A 100%);
+      border-radius:20px;padding:50px 48px;
+      display:flex;align-items:center;justify-content:space-between;
+      gap:28px;flex-wrap:wrap;position:relative;overflow:hidden;
+    }
+    .arrival-banner::before {
+      content:'NEW ARRIVALS 2026';
+      position:absolute;right:-40px;top:50%;transform:translateY(-50%) rotate(90deg);
+      font-size:80px;font-weight:900;color:rgba(255,255,255,0.03);
+      white-space:nowrap;letter-spacing:8px;pointer-events:none;
+    }
+    .ab-left h2 {
+      font-family:'Playfair Display',serif;
+      font-size:clamp(24px,4vw,42px);color:#fff;
+      line-height:1.15;margin-bottom:10px;font-weight:900;
+    }
+    .ab-left h2 em { font-style:italic;color:#ffd87a; }
+    .ab-left p { color:rgba(255,255,255,0.6);font-size:14px;max-width:380px;line-height:1.7; }
+    .ab-code {
+      background:rgba(255,255,255,0.1);
+      border:2px dashed rgba(200,134,10,0.5);
+      color:#ffd87a;font-size:22px;font-weight:800;
+      letter-spacing:4px;padding:14px 28px;border-radius:8px;
+      font-family:'Poppins',sans-serif;text-align:center;
+    }
+    .ab-code small { display:block;font-size:10px;letter-spacing:2px;color:rgba(255,255,255,0.4);margin-bottom:4px;font-weight:400; }
+
+    /* ── WHY ── */
+    .home-why { padding:70px 32px;background:#fff; }
+    .why-grid { display:grid;grid-template-columns:repeat(4,1fr);gap:20px;max-width:1100px;margin:0 auto; }
+    .why-card {
+      padding:32px 20px;border:2px solid #eee;border-radius:16px;
+      text-align:center;transition:all 0.25s;background:#fff;
+    }
+    .why-card:hover { border-color:var(--brown2);box-shadow:0 8px 28px rgba(92,45,14,0.12);transform:translateY(-4px); }
+    .why-card .wi { font-size:40px;margin-bottom:14px; }
+    .why-card h4  { font-size:14px;font-weight:700;color:var(--brown);margin-bottom:8px; }
+    .why-card p   { font-size:12px;color:var(--gray);line-height:1.7; }
+
+    /* ── TRENDING ── */
+    .trending-section { padding:70px 32px;background:var(--cream); }
+
+    /* ── REVIEWS ── */
+    .home-reviews {
+      padding:70px 32px;
+      background:linear-gradient(135deg,#1a0800 0%,#3B1505 100%);
+    }
+    .home-reviews .section-title { color:#fff; }
+    .rev-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:1060px;margin:0 auto; }
+    .rev-card {
+      background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);
+      border-radius:16px;padding:28px;transition:transform 0.22s;
+    }
+    .rev-card:hover { transform:translateY(-4px); }
+    .rev-stars { font-size:17px;color:#ffd87a;margin-bottom:12px;letter-spacing:2px; }
+    .rev-text  { font-size:13px;color:rgba(255,255,255,0.78);line-height:1.75;font-style:italic;margin-bottom:18px; }
+    .rev-author{ display:flex;align-items:center;gap:10px; }
+    .rev-av    { width:42px;height:42px;border-radius:50%;background:#C8860A;color:#fff;font-weight:800;font-size:15px;display:flex;align-items:center;justify-content:center;flex-shrink:0; }
+    .rev-name  { font-size:13px;font-weight:700;color:#fff; }
+    .rev-loc   { font-size:11px;color:rgba(255,255,255,0.38); }
+    .rev-badge { display:inline-block;background:rgba(200,134,10,0.22);border:1px solid rgba(200,134,10,0.4);color:#ffd87a;font-size:9px;font-weight:700;padding:2px 8px;border-radius:20px;letter-spacing:1px;margin-top:4px; }
+
+    /* ── NEWSLETTER ── */
+    .home-nl { padding:70px 32px;background:var(--light);text-align:center; }
+    .home-nl h2 { font-family:'Playfair Display',serif;font-size:32px;font-weight:900;color:var(--brown);margin-bottom:8px; }
+    .home-nl p  { font-size:14px;color:var(--gray);margin-bottom:26px;max-width:420px;margin-left:auto;margin-right:auto; }
+    .nl-form    { display:flex;max-width:460px;margin:0 auto;box-shadow:0 4px 16px rgba(92,45,14,0.12); }
+    .nl-form input { flex:1;padding:14px 20px;border:2px solid #ddd;border-right:none;border-radius:6px 0 0 6px;font-family:'Poppins',sans-serif;font-size:13px;outline:none; }
+    .nl-form input:focus { border-color:var(--brown2); }
+    .nl-form button { padding:14px 24px;background:var(--brown);color:#fff;border:none;border-radius:0 6px 6px 0;font-family:'Poppins',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;transition:background 0.2s; }
+    .nl-form button:hover { background:#3B1505; }
+
+
+    /* ── CART FLOAT ── */
+    .cart-float {
+      position:fixed;bottom:24px;right:24px;
+      background:var(--brown);color:#fff;
+      display:flex;align-items:center;gap:8px;
+      padding:13px 18px;border-radius:50px;
+      font-size:13px;font-weight:700;cursor:pointer;z-index:900;
+      box-shadow:0 4px 18px rgba(92,45,14,0.4);
+      text-decoration:none;transition:all 0.22s;
+    }
+    .cart-float:hover { background:#3B1505;transform:translateY(-2px); }
+
+    /* RESPONSIVE */
+    @media(max-width:960px) {
+      .hero-inner { grid-template-columns:1fr; }
+      .hero-visual { display:none; }
+      .cats-grid { grid-template-columns:repeat(3,1fr); }
+      .why-grid  { grid-template-columns:repeat(2,1fr); }
+      .rev-grid  { grid-template-columns:1fr 1fr; }
+    }
+    @media(max-width:600px) {
+      .cats-grid { grid-template-columns:repeat(2,1fr); }
+      .why-grid  { grid-template-columns:1fr 1fr; }
+      .rev-grid  { grid-template-columns:1fr; }
+      .arrival-banner { margin:0 16px; padding:30px 24px; flex-direction:column; text-align:center; }
+      .home-cats,.feat-section,.trending-section,.home-why,.home-reviews,.home-nl { padding:50px 16px; }
+    }
+
+  </style>
+</head>
+<body>
+
+<!-- PAGE LOADER -->
+<div id="page-loader">
+  <div class="loader-logo">BAGORA</div>
+  <div class="loader-tagline">Premium Bags &amp; Accessories</div>
+  <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+</div>
+
+<!-- ══ HEADER ══ -->
+<header>
+  <div class="header-top">
+    <a href="index.html" class="logo">
+      <div class="logo-name">BAGORA</div>
+      <div class="logo-tag">Premium Bags &amp; Accessories</div>
+    </a>
+    <div class="header-right">
+      <div class="search-bar">
+        <input type="text" id="search-input" placeholder="Search: backpack, leather, travel…"/>
+        <button id="search-btn">🔍</button>
+      </div>
+      <a href="wishlist.html" class="cart-btn wish-btn"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style="flex-shrink:0"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg> Wishlist <span class="wish-count wish-badge">0</span></a><a href="cart.html" class="cart-btn">🛍 Cart <span class="cart-count">0</span></a>
+    </div>
+  </div>
+</header>
+
+<!-- ══ NAV ══ -->
+<nav>
+  <a href="index.html">Home</a>
+  <a href="products.html">Products</a>
+  <a href="wishlist.html" class="nav-wish">Wishlist</a>
+  <a href="about.html">About</a>
+  <a href="contact.html">Contact</a>
+  <a href="login.html">Login</a>
+  <a href="register.html">Register</a>
+</nav>
+
+<!-- SEARCH OVERLAY -->
+<div id="search-results">
+  <div class="search-box">
+    <button class="search-close" onclick="document.getElementById('search-results').classList.remove('open')">✕</button>
+    <div id="search-result-box"></div>
+  </div>
+</div>
+
+<main>
+
+  <!-- ══ HERO ══ -->
+  <section class="home-hero">
+    <div class="hero-orb hero-orb-1"></div>
+    <div class="hero-orb hero-orb-2"></div>
+    <div class="hero-orb hero-orb-3"></div>
+    <div class="hero-dots"></div>
+    <div class="hero-stripe"></div>
+
+    <div class="hero-inner">
+
+      <!-- LEFT: Text -->
+      <div class="hero-left">
+        <div class="hero-label">
+          <span class="hero-label-dot"></span>
+          New Arrivals 2026
+        </div>
+
+        <h1 class="hero-h1">
+          Carry Your<br/>
+          <em>Story</em>
+          <span class="line3">with bags built for life.</span>
+        </h1>
+
+        <p class="hero-p">
+          From sleek laptop bags to rugged travel bags — BAGORA brings you premium craftsmanship at honest prices. Built to last, designed to impress.
+        </p>
+
+        <div class="hero-btns">
+          <a href="products.html" class="hbtn-main">🛍 Shop Now</a>
+          <a href="#featured" class="hbtn-outline2">Browse ↓</a>
+        </div>
+
+        <div class="hero-stats">
+          <div class="hs-item"><div class="hs-num">50K+</div><div class="hs-lbl">Customers</div></div>
+          <div class="hs-item"><div class="hs-num">200+</div><div class="hs-lbl">Bag Styles</div></div>
+          <div class="hs-item"><div class="hs-num">4.9★</div><div class="hs-lbl">Rating</div></div>
+          <div class="hs-item"><div class="hs-num">30d</div><div class="hs-lbl">Returns</div></div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Floating product cards -->
+      <div class="hero-visual" id="hero-visual"></div>
+    </div>
+  </section>
+
+  <!-- ══ TICKER ══ -->
+  <div class="ticker">
+    <div class="ticker-inner">
+      <span>BACKPACKS</span><span class="ticker-dot">✦</span>
+      <span>TRAVEL BAGS</span><span class="ticker-dot">✦</span>
+      <span>HANDBAGS</span><span class="ticker-dot">✦</span>
+      <span>LAPTOP BAGS</span><span class="ticker-dot">✦</span>
+      <span>TOTE BAGS</span><span class="ticker-dot">✦</span>
+      <span>FREE SHIPPING ₹999+</span><span class="ticker-dot">✦</span>
+      <span>NEW ARRIVALS 2026</span><span class="ticker-dot">✦</span>
+      <span>30-DAY RETURNS</span><span class="ticker-dot">✦</span>
+      <span>BACKPACKS</span><span class="ticker-dot">✦</span>
+      <span>TRAVEL BAGS</span><span class="ticker-dot">✦</span>
+      <span>HANDBAGS</span><span class="ticker-dot">✦</span>
+      <span>LAPTOP BAGS</span><span class="ticker-dot">✦</span>
+      <span>TOTE BAGS</span><span class="ticker-dot">✦</span>
+      <span>FREE SHIPPING ₹999+</span><span class="ticker-dot">✦</span>
+      <span>NEW ARRIVALS 2026</span><span class="ticker-dot">✦</span>
+      <span>30-DAY RETURNS</span><span class="ticker-dot">✦</span>
+    </div>
+  </div>
+
+  <!-- ══ CATEGORIES ══ -->
+  <section class="home-cats">
+    <div class="sec-hdr">
+      <h2 class="section-title">Browse by Category</h2>
+      <div class="section-line"></div>
+      <p>Find the perfect bag for every occasion</p>
+    </div>
+    <div class="cats-grid">
+      <a href="products.html?cat=Backpacks" class="cat-chip"><div class="ci">🎒</div><strong>Backpacks</strong><small>24 items</small></a>
+      <a href="products.html?cat=Travel"    class="cat-chip"><div class="ci">🧳</div><strong>Travel Bags</strong><small>18 items</small></a>
+      <a href="products.html?cat=Handbags"  class="cat-chip"><div class="ci">👜</div><strong>Handbags</strong><small>32 items</small></a>
+      <a href="products.html?cat=Laptop"    class="cat-chip"><div class="ci">💼</div><strong>Laptop Bags</strong><small>15 items</small></a>
+      <a href="products.html?cat=Totes"     class="cat-chip"><div class="ci">🛍</div><strong>Tote Bags</strong><small>20 items</small></a>
+    </div>
+  </section>
+
+  <!-- ══ FEATURED PRODUCTS ══ -->
+  <section class="feat-section" id="featured">
+    <div class="sec-hdr">
+      <h2 class="section-title">Featured Products</h2>
+      <div class="section-line"></div>
+      <p>Handpicked bestsellers — our most popular bags</p>
+    </div>
+    <div class="product-grid" id="featured-grid" style="max-width:1100px;margin:0 auto;"></div>
+    <div style="text-align:center;margin-top:36px;">
+      <a href="products.html" class="btn btn-brown" style="padding:14px 40px;font-size:14px;font-weight:700;">View All Products →</a>
+    </div>
+  </section>
+
+  <!-- ══ NEW ARRIVAL BANNER ══ -->
+  <div class="arrival-banner">
+    <div class="ab-left">
+      <h2>Get <em>20% Off</em><br/>Your First Order</h2>
+      <p>Shop from our latest collection with an exclusive discount. Valid on all bag categories.</p>
+      <a href="products.html" class="hbtn-main" style="margin-top:16px;display:inline-block;">Shop the Sale →</a>
+    </div>
+    <div>
+      <div class="ab-code">
+        <small>USE CODE AT CHECKOUT</small>
+        BAGORA20
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ WHY BAGORA ══ -->
+  <section class="home-why">
+    <div class="sec-hdr">
+      <h2 class="section-title">Why Choose BAGORA?</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="why-grid">
+      <div class="why-card"><div class="wi">🏆</div><h4>Premium Quality</h4><p>Every bag crafted with high-grade materials selected for durability and long-lasting style.</p></div>
+      <div class="why-card"><div class="wi">🚚</div><h4>Free Shipping</h4><p>Free delivery on all orders above ₹999 across India. Fast, tracked, and reliable.</p></div>
+      <div class="why-card"><div class="wi">🔄</div><h4>30-Day Returns</h4><p>Not satisfied? Return within 30 days for a full refund, no questions asked.</p></div>
+      <div class="why-card"><div class="wi">🛡️</div><h4>Secure Checkout</h4><p>Your payments and data are protected with bank-grade encrypted checkout.</p></div>
+    </div>
+  </section>
+
+  <!-- ══ TRENDING ══ -->
+  <section class="trending-section">
+    <div class="sec-hdr">
+      <h2 class="section-title">🔥 Trending Right Now</h2>
+      <div class="section-line"></div>
+      <p>Most popular picks this week</p>
+    </div>
+    <div class="product-grid" id="trending-grid" style="max-width:1100px;margin:0 auto;"></div>
+  </section>
+
+  <!-- ══ REVIEWS ══ -->
+  <section class="home-reviews">
+    <div class="sec-hdr">
+      <h2 class="section-title">What Customers Say</h2>
+      <div class="section-line"></div>
+      <p style="color:rgba(255,255,255,0.5)">Trusted by 50,000+ happy customers across India</p>
+    </div>
+    <div class="rev-grid">
+      <div class="rev-card">
+        <div class="rev-stars">★★★★★</div>
+        <p class="rev-text">"Absolutely love my BAGORA backpack! The quality is insane for the price — still looks brand new after 6 months of daily use."</p>
+        <div class="rev-author">
+          <div class="rev-av">A</div>
+          <div>
+            <div class="rev-name">Aditi Sharma</div>
+            <div class="rev-loc">Mumbai</div>
+            <span class="rev-badge">VERIFIED BUYER</span>
+          </div>
+        </div>
+      </div>
+      <div class="rev-card">
+        <div class="rev-stars">★★★★★</div>
+        <p class="rev-text">"The leather tote is absolutely stunning. Arrived beautifully packed, super fast delivery. Already getting compliments at work!"</p>
+        <div class="rev-author">
+          <div class="rev-av">R</div>
+          <div>
+            <div class="rev-name">Rahul Mehta</div>
+            <div class="rev-loc">Delhi</div>
+            <span class="rev-badge">VERIFIED BUYER</span>
+          </div>
+        </div>
+      </div>
+      <div class="rev-card">
+        <div class="rev-stars">★★★★☆</div>
+        <p class="rev-text">"Great laptop bag — looks so professional. The padded compartment fits my 15.6″ perfectly. Will definitely buy from BAGORA again!"</p>
+        <div class="rev-author">
+          <div class="rev-av">P</div>
+          <div>
+            <div class="rev-name">Priya Nair</div>
+            <div class="rev-loc">Bangalore</div>
+            <span class="rev-badge">VERIFIED BUYER</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ NEWSLETTER ══ -->
+  <section class="home-nl">
+    <h2>Stay in the Loop 📬</h2>
+    <p>Get the latest drops, exclusive deals and style tips — straight to your inbox. No spam, ever.</p>
+    <div class="nl-form">
+      <input type="email" id="nl-email" placeholder="Enter your email address…"/>
+      <button onclick="nlSubmit()">Subscribe →</button>
+    </div>
+    <p style="font-size:11px;color:#bbb;margin-top:12px;">Join 50,000+ subscribers &nbsp;·&nbsp; Unsubscribe anytime</p>
+  </section>
+
+</main>
+
+<!-- FLOATING CART BUTTON -->
+<a href="cart.html" class="cart-float">
+  🛍 Cart <span class="cart-count" style="background:rgba(255,255,255,0.2);border-radius:20px;padding:1px 8px;font-size:12px;">0</span>
+</a>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo-name">BAGORA</div>
+      <div class="logo-tag" style="margin-bottom:12px;">Premium Bags &amp; Accessories</div>
+      <p>Your one-stop shop for premium bags — backpacks, handbags, travel bags and more. Quality you can trust, prices you'll love.</p>
+    </div>
+    <div>
+      <h4>Quick Links</h4>
+      <a href="index.html">Home</a>
+      <a href="products.html">Products</a>
+  <a href="wishlist.html" class="nav-wish">Wishlist</a>
+      <a href="about.html">About Us</a>
+      <a href="contact.html">Contact</a>
+      <a href="login.html">Login / Register</a>
+    </div>
+    <div>
+      <h4>Contact Info</h4>
+      <p>📍 Sector 12, Gandhinagar, Gujarat</p>
+      <p>📞 +91 98765 43210</p>
+      <p>📧 support@bagora.in</p>
+      <p>🕐 Mon–Sat: 9 AM – 7 PM</p>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2026 BAGORA – All Rights Reserved &nbsp;|&nbsp; Made with ❤️ in India</div>
+</footer>
+
+<script src="main.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+  /* ── HERO VISUAL CARDS ── */
+  const hv = document.getElementById('hero-visual');
+  const hp = [PRODUCTS[0], PRODUCTS[2], PRODUCTS[3], PRODUCTS[8]];
+  hv.innerHTML = `
+    <div class="hero-cards-row">
+      ${hp.slice(0,2).map(p => `
+        <div class="hero-card" onclick="window.location='product.html?id=${p.id}'">
+          ${p.badge ? `<span class="hc-badge">${p.badge}</span>` : ''}
+          <div class="hc-cat">${p.cat}</div>
+          <div class="hc-svg">
+            <div style="transform:scale(0.68);transform-origin:center;width:110px;height:110px;display:flex;align-items:center;justify-content:center;">
+              ${getBagSVG(p.cat)}
+            </div>
+          </div>
+          <div class="hc-name">${p.name}</div>
+          <div class="hc-price">₹${p.price.toLocaleString()}</div>
+        </div>`).join('')}
+    </div>
+    ${hp.slice(2).map(p => `
+      <div class="hero-wide-card" onclick="window.location='product.html?id=${p.id}'">
+        <div style="transform:scale(0.5);transform-origin:center;width:90px;height:90px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          ${getBagSVG(p.cat)}
+        </div>
+        <div style="flex:1;">
+          <div class="hwc-name">${p.name}</div>
+          <div class="hwc-cat">${p.cat}</div>
+        </div>
+        <div class="hwc-price">₹${p.price.toLocaleString()}</div>
+      </div>`).join('')}
+  `;
+
+  /* ── FEATURED: 6 products ── */
+  document.getElementById('featured-grid').innerHTML =
+    PRODUCTS.slice(0,6).map(buildProductCard).join('');
+
+  /* ── TRENDING: top 4 by price ── */
+  const trending = [...PRODUCTS].sort((a,b) => b.price - a.price).slice(0,4);
+  document.getElementById('trending-grid').innerHTML =
+    trending.map(buildProductCard).join('');
+});
+
+function nlSubmit() {
+  const e = document.getElementById('nl-email');
+  if (!e.value || !e.value.includes('@')) {
+    showToast('⚠️ Please enter a valid email.'); return;
+  }
+  showToast('✅ Subscribed! Welcome to the BAGORA family!');
+  e.value = '';
+}
+</script>
+</body>
+</html>

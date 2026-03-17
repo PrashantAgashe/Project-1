@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Register – BAGORA</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+<div id="page-loader">
+  <div class="loader-logo">BAGORA</div>
+  <div class="loader-tagline">Premium Bags &amp; Accessories</div>
+  <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+</div>
+
+<header>
+  <div class="header-top">
+    <a href="index.html" class="logo">
+      <div class="logo-name">BAGORA</div>
+      <div class="logo-tag">Premium Bags &amp; Accessories</div>
+    </a>
+    <div class="header-right">
+      <a href="wishlist.html" class="cart-btn wish-btn"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style="flex-shrink:0"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg> Wishlist <span class="wish-count wish-badge">0</span></a><a href="cart.html" class="cart-btn">🛍 Cart <span class="cart-count">0</span></a>
+    </div>
+  </div>
+</header>
+<nav>
+  <a href="index.html">Home</a>
+  <a href="products.html">Products</a>
+  <a href="wishlist.html" class="nav-wish">Wishlist</a>
+  <a href="about.html">About</a>
+  <a href="contact.html">Contact</a>
+  <a href="login.html">Login</a>
+  <a href="register.html">Register</a>
+</nav>
+
+<main>
+  <div class="page-banner">
+    <h1>Create Account</h1>
+    <p>Join BAGORA and enjoy exclusive member benefits</p>
+  </div>
+
+  <div class="form-wrap" style="max-width:520px">
+    <div style="text-align:center;margin-bottom:20px;">
+      <div style="font-size:26px;font-weight:700;letter-spacing:5px;color:var(--brown);">BAGORA</div>
+      <div style="font-size:10px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;">Create your free account</div>
+    </div>
+
+    <div class="success-msg" id="success-msg">✓ Account created! Redirecting to login…</div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>First Name *</label>
+        <input type="text" id="fname" placeholder="Prashant"/>
+        <div class="error-msg" id="err-fname">Required field.</div>
+      </div>
+      <div class="form-group">
+        <label>Last Name *</label>
+        <input type="text" id="lname" placeholder="Agashe"/>
+        <div class="error-msg" id="err-lname">Required field.</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Email Address *</label>
+      <input type="email" id="email" placeholder="you@example.com"/>
+      <div class="error-msg" id="err-email">Please enter a valid email.</div>
+    </div>
+
+    <div class="form-group">
+      <label>Phone Number *</label>
+      <input type="tel" id="phone" placeholder="+91 98765 43210"/>
+      <div class="error-msg" id="err-phone">Enter a valid 10-digit phone number.</div>
+    </div>
+
+    <div class="form-group">
+      <label>Password *</label>
+      <div style="position:relative">
+        <input type="password" id="password" placeholder="Minimum 6 characters" style="padding-right:44px"/>
+        <button type="button" onclick="togglePass('password',this)" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:16px;color:#777;">👁</button>
+      </div>
+      <div class="error-msg" id="err-pass">Password must be at least 6 characters.</div>
+    </div>
+
+    <div class="form-group">
+      <label>Confirm Password *</label>
+      <div style="position:relative">
+        <input type="password" id="confirm" placeholder="Re-enter your password" style="padding-right:44px"/>
+        <button type="button" onclick="togglePass('confirm',this)" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:16px;color:#777;">👁</button>
+      </div>
+      <div class="error-msg" id="err-confirm">Passwords do not match.</div>
+    </div>
+
+    <div style="margin-bottom:20px;font-size:13px;color:#555">
+      <label style="display:flex;align-items:flex-start;gap:8px;cursor:pointer;">
+        <input type="checkbox" id="terms" style="margin-top:3px;accent-color:var(--brown)">
+        I agree to the <a href="#" style="color:var(--brown2);margin:0 3px;">Terms of Service</a> and <a href="#" style="color:var(--brown2);margin:0 3px;">Privacy Policy</a>
+      </label>
+      <div class="error-msg" id="err-terms" style="margin-top:4px">You must accept the terms.</div>
+    </div>
+
+    <button class="btn btn-brown" style="width:100%;padding:12px;font-size:14px;" onclick="handleRegister()">Create Account →</button>
+
+    <p class="form-footer">Already have an account? <a href="login.html">Sign in here</a></p>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo-name">BAGORA</div>
+      <div class="logo-tag" style="margin-bottom:10px">Premium Bags &amp; Accessories</div>
+      <p>Your one-stop shop for premium bags.</p>
+    </div>
+    <div><h4>Quick Links</h4><a href="index.html">Home</a><a href="products.html">Products</a>
+  <a href="wishlist.html" class="nav-wish">Wishlist</a><a href="about.html">About</a><a href="contact.html">Contact</a></div>
+    <div><h4>Contact Info</h4><p>📍 Gandhinagar, Gujarat</p><p>📞 +91 98765 43210</p><p>📧 support@bagora.in</p></div>
+  </div>
+  <div class="footer-bottom">© 2026 BAGORA – All Rights Reserved</div>
+</footer>
+
+<script src="main.js"></script>
+<script>
+function togglePass(id, btn) {
+  const inp = document.getElementById(id);
+  inp.type = inp.type === 'password' ? 'text' : 'password';
+  btn.textContent = inp.type === 'password' ? '👁' : '🙈';
+}
+
+function show(id, show) {
+  document.getElementById(id).style.display = show ? 'block' : 'none';
+}
+
+function handleRegister() {
+  let valid = true;
+
+  const fname   = document.getElementById('fname').value.trim();
+  const lname   = document.getElementById('lname').value.trim();
+  const email   = document.getElementById('email').value.trim();
+  const phone   = document.getElementById('phone').value.trim();
+  const pass    = document.getElementById('password').value.trim();
+  const confirm = document.getElementById('confirm').value.trim();
+  const terms   = document.getElementById('terms').checked;
+
+  show('err-fname',   !fname);           if (!fname)   valid = false;
+  show('err-lname',   !lname);           if (!lname)   valid = false;
+  show('err-email',   !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email));
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) valid = false;
+  show('err-phone',   !/^\+?\d{10,13}$/.test(phone.replace(/\s/g,'')));
+  if (!/^\+?\d{10,13}$/.test(phone.replace(/\s/g,''))) valid = false;
+  show('err-pass',    pass.length < 6);  if (pass.length < 6)  valid = false;
+  show('err-confirm', pass !== confirm); if (pass !== confirm)  valid = false;
+  show('err-terms',   !terms);           if (!terms)   valid = false;
+
+  if (valid) {
+    document.getElementById('success-msg').style.display = 'block';
+    setTimeout(() => { window.location.href = 'login.html'; }, 1800);
+  }
+}
+</script>
+</body>
+</html>

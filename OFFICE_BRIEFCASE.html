@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Office Briefcase – BAGORA</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet"/>
+  <style>
+    .pd-wrap { max-width:1100px; margin:0 auto; padding:40px 32px; display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:start; }
+    .pd-gallery { position:sticky; top:80px; }
+    .pd-main-img { width:100%; border-radius:16px; overflow:hidden; background:#f5f5f5; aspect-ratio:1/1; display:flex; align-items:center; justify-content:center; box-shadow:0 8px 40px rgba(0,0,0,0.12); }
+    .pd-main-img img { width:100%; height:100%; object-fit:cover; }
+    .pd-cat { font-size:11px; color:var(--gold); font-weight:700; text-transform:uppercase; letter-spacing:2px; margin-bottom:8px; display:block; }
+    .pd-title { font-family:'Playfair Display',serif; font-size:clamp(24px,3.5vw,36px); font-weight:700; color:var(--brown); margin-bottom:14px; line-height:1.2; }
+    .pd-price-row { display:flex; align-items:center; gap:12px; margin-bottom:18px; flex-wrap:wrap; }
+    .pd-price { font-size:30px; font-weight:800; color:var(--brown2); }
+    .prod-old-price { font-size:16px; color:#aaa; text-decoration:line-through; }
+    .pd-badge { display:inline-block; background:var(--brown); color:#fff; font-size:11px; font-weight:700; padding:4px 12px; border-radius:4px; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:14px; }
+    .prod-save-badge { background:#e53e3e; color:#fff; font-size:11px; font-weight:700; padding:3px 10px; border-radius:20px; }
+    .pd-desc { font-size:14px; color:#555; line-height:1.85; margin-bottom:22px; }
+    .pd-features { background:var(--light); border-radius:10px; padding:18px 20px; margin-bottom:22px; font-size:13px; color:#555; line-height:2.2; }
+    .pd-qty-row { display:flex; align-items:center; gap:14px; margin-bottom:20px; }
+    .pd-qty-row label { font-size:13px; font-weight:600; color:var(--brown); }
+    .qty-ctrl { display:flex; align-items:center; border:2px solid var(--border); border-radius:6px; overflow:hidden; }
+    .qty-ctrl button { background:#f5f5f5; border:none; width:36px; height:36px; font-size:18px; cursor:pointer; transition:background 0.15s; color:var(--brown); font-weight:700; }
+    .qty-ctrl button:hover { background:var(--brown); color:#fff; }
+    .qty-ctrl input { width:52px; height:36px; border:none; text-align:center; font-size:15px; font-weight:600; outline:none; font-family:'Poppins',sans-serif; }
+    .pd-action-row { display:flex; gap:12px; flex-wrap:wrap; margin-bottom:20px; }
+    .pd-action-row .btn { flex:1; min-width:130px; padding:14px 20px; font-size:14px; font-weight:700; text-align:center; }
+    .pd-wish-btn { background:none; border:2px solid #e53e3e; color:#e53e3e; border-radius:6px; padding:13px 18px; font-size:14px; font-weight:700; cursor:pointer; font-family:'Poppins',sans-serif; display:flex; align-items:center; gap:7px; transition:all 0.2s; white-space:nowrap; }
+    .pd-wish-btn:hover, .pd-wish-btn.wished { background:#e53e3e; color:#fff; }
+    .pd-tabs { margin:40px 0 0; }
+    .tab-bar { display:flex; border-bottom:2px solid #eee; }
+    .tab-bar button { padding:11px 22px; background:none; border:none; font-family:'Poppins',sans-serif; font-size:13px; font-weight:600; cursor:pointer; color:#888; border-bottom:2px solid transparent; margin-bottom:-2px; transition:all 0.2s; }
+    .tab-bar button.active { color:var(--brown); border-bottom-color:var(--brown); }
+    .tab-content { padding:24px 0; font-size:14px; color:#555; line-height:1.85; display:none; }
+    .tab-content.active { display:block; }
+    .spec-table { width:100%; border-collapse:collapse; }
+    .spec-table tr:nth-child(even) td { background:var(--light); }
+    .spec-table td { padding:11px 16px; border:1px solid #eee; font-size:13px; }
+    .spec-table td:first-child { font-weight:700; color:var(--brown); width:40%; }
+    .related-section { padding:60px 32px; background:var(--cream); }
+    @media(max-width:768px) {
+      .pd-wrap { grid-template-columns:1fr; gap:28px; padding:24px 16px; }
+      .pd-gallery { position:static; }
+      .related-section { padding:40px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="page-loader">
+  <div class="loader-logo">BAGORA</div>
+  <div class="loader-tagline">Premium Bags &amp; Accessories</div>
+  <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+</div>
+
+<header>
+  <div class="header-top">
+    <a href="index.html" class="logo">
+      <div class="logo-name">BAGORA</div>
+      <div class="logo-tag">Premium Bags &amp; Accessories</div>
+    </a>
+    <div class="header-right">
+      <div class="search-bar">
+        <input type="text" id="search-input" placeholder="Search bags…"/>
+        <button id="search-btn">🔍</button>
+      </div>
+      <a href="wishlist.html" class="cart-btn wish-btn"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style="flex-shrink:0"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg> Wishlist <span class="wish-count wish-badge">0</span></a>
+      <a href="cart.html" class="cart-btn">🛍 Cart <span class="cart-count">0</span></a>
+    </div>
+  </div>
+</header>
+<nav>
+  <a href="index.html">Home</a>
+  <a href="products.html">Products</a>
+  <a href="wishlist.html" class="nav-wish">Wishlist</a>
+  <a href="about.html">About</a>
+  <a href="contact.html">Contact</a>
+  <a href="login.html">Login</a>
+  <a href="register.html">Register</a>
+</nav>
+<div id="search-results"><div class="search-box"><button class="search-close" onclick="document.getElementById('search-results').classList.remove('open')">✕</button><div id="search-result-box"></div></div></div>
+
+<main>
+
+  <!-- BREADCRUMB -->
+  <div style="padding:12px 32px;background:#fff;border-bottom:1px solid #eee;font-size:13px;color:#999;">
+    <a href="index.html" style="color:var(--brown2);text-decoration:none;">Home</a> &rsaquo;
+    <a href="products.html" style="color:var(--brown2);text-decoration:none;">Products</a> &rsaquo;
+    <a href="products.html?cat=Laptop" style="color:var(--brown2);text-decoration:none;">Laptop</a> &rsaquo;
+    <span style="color:var(--brown);font-weight:600;">Office Briefcase</span>
+  </div>
+
+  <!-- PRODUCT DETAIL -->
+  <div class="pd-wrap">
+
+    <!-- LEFT: Image Gallery -->
+    <div class="pd-gallery">
+      <div class="pd-main-img">
+        <img src="images/OFFICE_BRIEFCASE.jpg" alt="Office Briefcase" id="main-product-img"/>
+      </div>
+    </div>
+
+    <!-- RIGHT: Info -->
+    <div class="pd-info">
+      <span class='pd-badge'>Premium</span>
+      <span class="pd-cat">Laptop</span>
+      <h1 class="pd-title">Office Briefcase</h1>
+
+      <div class="pd-price-row">
+        <span class="pd-price">₹2,199</span>
+        
+      </div>
+
+      <p class="pd-desc">Professional briefcase in premium faux leather with a padded laptop sleeve, document organizer, and secure combination lock. Style meets function.</p>
+
+      <div class="pd-features">
+        ✅ &nbsp;Free shipping on orders above ₹999<br>
+        🔄 &nbsp;30-day hassle-free return policy<br>
+        🛡️ &nbsp;1-year manufacturer warranty<br>
+        📦 &nbsp;Usually ships in 2–3 business days<br>
+        🏷️ &nbsp;Tags: briefcase, office, laptop, formal, business
+      </div>
+
+      <div class="pd-qty-row">
+        <label>Quantity:</label>
+        <div class="qty-ctrl">
+          <button onclick="changeQtyPD(-1)">−</button>
+          <input type="number" id="pd-qty" value="1" min="1" max="99"/>
+          <button onclick="changeQtyPD(1)">+</button>
+        </div>
+      </div>
+
+      <div class="pd-action-row">
+        <button class="btn btn-primary" onclick="handleAddCart()">🛍 Add to Cart</button>
+        <a href="cart.html" class="btn btn-brown" onclick="handleAddCart(); return true;">⚡ Buy Now</a>
+        <button class="pd-wish-btn" id="pd-wish-btn" onclick="handleWish()">
+          <svg viewBox="0 0 24 24" width="16" height="16" id="pd-heart-svg"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+          <span id="pd-wish-lbl">Save</span>
+        </button>
+      </div>
+
+      <!-- TABS -->
+      <div class="pd-tabs">
+        <div class="tab-bar">
+          <button class="active" onclick="switchTab('desc',this)">Description</button>
+          <button onclick="switchTab('specs',this)">Specifications</button>
+          <button onclick="switchTab('reviews',this)">Reviews</button>
+        </div>
+        <div id="tab-desc" class="tab-content active">
+          <p>Professional briefcase in premium faux leather with a padded laptop sleeve, document organizer, and secure combination lock. Style meets function. Crafted with premium materials and meticulous attention to detail, this bag is built to accompany you through every journey — whether it's a daily commute, weekend trip, or special occasion.</p>
+        </div>
+        <div id="tab-specs" class="tab-content">
+          <table class="spec-table">
+            <tr><td>Category</td><td>Laptop</td></tr>
+            <tr><td>Material</td><td>Premium Grade Fabric / Leather</td></tr>
+            <tr><td>Warranty</td><td>1 Year Manufacturer Warranty</td></tr>
+            <tr><td>Water Resistant</td><td>Yes</td></tr>
+            <tr><td>Made In</td><td>India</td></tr>
+            <tr><td>Return Policy</td><td>30 Days</td></tr>
+            <tr><td>MRP</td><td>₹2,199</td></tr>
+          </table>
+        </div>
+        <div id="tab-reviews" class="tab-content">
+          <div style="display:flex;flex-direction:column;gap:16px;">
+            <div style="border:1px solid #eee;border-radius:8px;padding:16px;">
+              <div style="color:#C8860A;font-size:15px;margin-bottom:6px;">★★★★★</div>
+              <p style="font-size:13px;color:#555;margin-bottom:8px;font-style:italic;">"Absolutely love this bag! Great quality and fast delivery. Highly recommended."</p>
+              <span style="font-size:12px;font-weight:700;color:var(--brown);">Priya S. — Mumbai</span>
+            </div>
+            <div style="border:1px solid #eee;border-radius:8px;padding:16px;">
+              <div style="color:#C8860A;font-size:15px;margin-bottom:6px;">★★★★☆</div>
+              <p style="font-size:13px;color:#555;margin-bottom:8px;font-style:italic;">"Sturdy build, looks exactly like the photo. Very happy with my purchase from BAGORA."</p>
+              <span style="font-size:12px;font-weight:700;color:var(--brown);">Arjun M. — Delhi</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RELATED PRODUCTS -->
+  <section class="related-section">
+    <div style="text-align:center;margin-bottom:28px;">
+      <h2 class="section-title">You May Also Like</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="product-grid" id="related-grid" style="max-width:1100px;margin:0 auto;"></div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo-name">BAGORA</div>
+      <div class="logo-tag" style="margin-bottom:10px;">Premium Bags &amp; Accessories</div>
+      <p>Your one-stop shop for premium bags — quality you can trust.</p>
+    </div>
+    <div>
+      <h4>Quick Links</h4>
+      <a href="index.html">Home</a>
+      <a href="products.html">Products</a>
+      <a href="wishlist.html">Wishlist</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div>
+      <h4>Contact Info</h4>
+      <p>📍 Sector 12, Gandhinagar, Gujarat</p>
+      <p>📞 +91 98765 43210</p>
+      <p>📧 support@bagora.in</p>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2026 BAGORA – All Rights Reserved &nbsp;|&nbsp; Made with ❤️ in India</div>
+</footer>
+
+<script src="main.js"></script>
+<script>
+const THIS_ID = 7;
+
+function changeQtyPD(d) {
+  const i = document.getElementById('pd-qty');
+  i.value = Math.max(1, parseInt(i.value || 1) + d);
+}
+function handleAddCart() {
+  const qty = parseInt(document.getElementById('pd-qty').value || 1);
+  addToCart(THIS_ID, qty);
+}
+function handleWish() {
+  toggleWishlist(THIS_ID);
+  updateWishBtn();
+}
+function updateWishBtn() {
+  const btn = document.getElementById('pd-wish-btn');
+  const lbl = document.getElementById('pd-wish-lbl');
+  const svg = document.getElementById('pd-heart-svg').querySelector('path');
+  const wished = isWished(THIS_ID);
+  btn.classList.toggle('wished', wished);
+  svg.setAttribute('fill', wished ? '#fff' : 'none');
+  lbl.textContent = wished ? 'Saved ♥' : 'Save';
+}
+function switchTab(id, btn) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-bar button').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+document.addEventListener('DOMContentLoaded', () => {
+  updateWishBtn();
+  const related = PRODUCTS.filter(p => p.id !== THIS_ID).sort(() => 0.5 - Math.random()).slice(0, 4);
+  document.getElementById('related-grid').innerHTML = related.map(buildProductCard).join('');
+});
+</script>
+</body>
+</html>

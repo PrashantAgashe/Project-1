@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Us – BAGORA</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet"/>
+  <style>
+    /* ── ABOUT HERO ── */
+    .about-hero {
+      background: linear-gradient(135deg, #1a0800 0%, #3B1505 40%, #6B2F0A 80%, #9B5523 100%);
+      padding: 80px 32px 70px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .about-hero::before {
+      content:'';position:absolute;inset:0;
+      background-image:radial-gradient(circle,rgba(255,255,255,0.05) 1.5px,transparent 1.5px);
+      background-size:30px 30px;pointer-events:none;
+    }
+    .about-hero-inner { position:relative;z-index:2; }
+    .about-hero-badge {
+      display:inline-block;background:rgba(200,134,10,0.18);
+      border:1px solid rgba(200,134,10,0.4);color:#ffd87a;
+      font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;
+      padding:6px 18px;border-radius:50px;margin-bottom:20px;
+    }
+    .about-hero h1 {
+      font-family:'Playfair Display',serif;
+      font-size:clamp(32px,5vw,60px);font-weight:900;color:#fff;
+      line-height:1.1;margin-bottom:16px;
+    }
+    .about-hero h1 em { font-style:italic;color:#ffd87a; }
+    .about-hero p { font-size:15px;color:rgba(255,255,255,0.65);max-width:520px;margin:0 auto;line-height:1.8; }
+
+    /* ── STATS BAR ── */
+    .stats-bar {
+      background:#fff;
+      display:grid;grid-template-columns:repeat(4,1fr);
+      border-bottom:2px solid #f0f0f0;
+    }
+    .stat-cell {
+      text-align:center;padding:28px 16px;
+      border-right:1px solid #f0f0f0;
+    }
+    .stat-cell:last-child { border-right:none; }
+    .stat-num { font-size:clamp(24px,4vw,36px);font-weight:900;color:var(--brown);line-height:1; }
+    .stat-lbl { font-size:11px;color:var(--gray);text-transform:uppercase;letter-spacing:1.5px;margin-top:5px; }
+
+    /* ── STORY SECTION ── */
+    .about-story {
+      padding:80px 32px;background:#fff;
+      display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;
+      max-width:1100px;margin:0 auto;
+    }
+    .story-text h2 {
+      font-family:'Playfair Display',serif;
+      font-size:clamp(24px,3.5vw,38px);font-weight:900;color:var(--brown);
+      line-height:1.2;margin-bottom:18px;
+    }
+    .story-text h2 em { font-style:italic;color:var(--gold); }
+    .story-text p { font-size:14px;color:#555;line-height:1.9;margin-bottom:14px; }
+    .story-img-grid {
+      display:grid;grid-template-columns:1fr 1fr;gap:12px;
+    }
+    .story-img-grid img {
+      width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:12px;
+      box-shadow:0 4px 18px rgba(0,0,0,0.1);transition:transform 0.3s;
+    }
+    .story-img-grid img:hover { transform:scale(1.04); }
+    .story-img-grid img:first-child { grid-column:1/-1;aspect-ratio:16/9; }
+
+    /* ── COLLECTION SHOWCASE ── */
+    .collection-section {
+      padding:80px 32px;background:var(--cream);
+    }
+    .collection-grid {
+      display:grid;grid-template-columns:repeat(5,1fr);gap:14px;
+      max-width:1100px;margin:0 auto;
+    }
+    .col-item {
+      border-radius:14px;overflow:hidden;position:relative;
+      cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,0.08);
+      transition:transform 0.3s,box-shadow 0.3s;
+    }
+    .col-item:hover { transform:translateY(-6px);box-shadow:0 12px 32px rgba(0,0,0,0.15); }
+    .col-item img { width:100%;aspect-ratio:3/4;object-fit:cover;display:block; }
+    .col-item-overlay {
+      position:absolute;bottom:0;left:0;right:0;
+      background:linear-gradient(transparent,rgba(0,0,0,0.72));
+      padding:30px 12px 14px;
+    }
+    .col-item-name { font-size:12px;font-weight:700;color:#fff;line-height:1.3; }
+    .col-item-price { font-size:12px;color:#ffd87a;font-weight:700;margin-top:2px; }
+
+    /* ── VALUES SECTION ── */
+    .values-section {
+      padding:80px 32px;background:#fff;
+    }
+    .values-grid {
+      display:grid;grid-template-columns:repeat(3,1fr);gap:24px;
+      max-width:1000px;margin:0 auto;
+    }
+    .val-card {
+      padding:36px 24px;border-radius:16px;text-align:center;
+      background:var(--cream);border:2px solid transparent;
+      transition:all 0.25s;
+    }
+    .val-card:hover { border-color:var(--brown2);transform:translateY(-5px);box-shadow:0 10px 28px rgba(92,45,14,0.12); }
+    .val-icon { font-size:42px;margin-bottom:14px; }
+    .val-card h3 { font-size:16px;font-weight:700;color:var(--brown);margin-bottom:8px; }
+    .val-card p  { font-size:13px;color:#666;line-height:1.75; }
+
+    /* ── TEAM SECTION ── */
+    .team-section {
+      padding:80px 32px;
+      background:linear-gradient(135deg,#1a0800 0%,#3B1505 100%);
+    }
+    .team-section .section-title { color:#fff; }
+    .team-grid {
+      display:grid;grid-template-columns:repeat(3,1fr);gap:22px;
+      max-width:900px;margin:0 auto;
+    }
+    .team-card {
+      background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);
+      border-radius:16px;padding:28px;text-align:center;transition:transform 0.22s;
+    }
+    .team-card:hover { transform:translateY(-4px); }
+    .team-av {
+      width:72px;height:72px;border-radius:50%;margin:0 auto 14px;
+      background:var(--gold);display:flex;align-items:center;justify-content:center;
+      font-size:28px;font-weight:800;color:#fff;
+    }
+    .team-name { font-size:15px;font-weight:700;color:#fff;margin-bottom:3px; }
+    .team-role { font-size:12px;color:rgba(255,255,255,0.5);letter-spacing:1px;text-transform:uppercase; }
+
+    /* ── CTA ── */
+    .about-cta {
+      padding:80px 32px;text-align:center;background:var(--cream);
+    }
+    .about-cta h2 { font-family:'Playfair Display',serif;font-size:clamp(24px,4vw,40px);font-weight:900;color:var(--brown);margin-bottom:14px; }
+    .about-cta p  { font-size:15px;color:var(--gray);margin-bottom:28px;max-width:480px;margin-left:auto;margin-right:auto; }
+
+    @media(max-width:900px) {
+      .about-story { grid-template-columns:1fr;gap:32px; }
+      .collection-grid { grid-template-columns:repeat(3,1fr); }
+      .values-grid { grid-template-columns:1fr 1fr; }
+      .team-grid  { grid-template-columns:1fr 1fr; }
+      .stats-bar  { grid-template-columns:repeat(2,1fr); }
+    }
+    @media(max-width:600px) {
+      .about-hero,.about-story,.collection-section,.values-section,.team-section,.about-cta { padding:50px 16px; }
+      .collection-grid { grid-template-columns:repeat(2,1fr); }
+      .values-grid { grid-template-columns:1fr; }
+      .team-grid  { grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="page-loader">
+  <div class="loader-logo">BAGORA</div>
+  <div class="loader-tagline">Premium Bags &amp; Accessories</div>
+  <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+</div>
+
+<header>
+  <div class="header-top">
+    <a href="index.html" class="logo">
+      <div class="logo-name">BAGORA</div>
+      <div class="logo-tag">Premium Bags &amp; Accessories</div>
+    </a>
+    <div class="header-right">
+      <div class="search-bar">
+        <input type="text" id="search-input" placeholder="Search bags…"/>
+        <button id="search-btn">🔍</button>
+      </div>
+      <a href="wishlist.html" class="cart-btn wish-btn"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style="flex-shrink:0"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg> Wishlist <span class="wish-count wish-badge">0</span></a>
+      <a href="cart.html" class="cart-btn">🛍 Cart <span class="cart-count">0</span></a>
+    </div>
+  </div>
+</header>
+<nav>
+  <a href="index.html">Home</a>
+  <a href="products.html">Products</a>
+  <a href="wishlist.html" class="nav-wish">Wishlist</a>
+  <a href="about.html">About</a>
+  <a href="contact.html">Contact</a>
+  <a href="login.html">Login</a>
+  <a href="register.html">Register</a>
+</nav>
+<div id="search-results"><div class="search-box"><button class="search-close" onclick="document.getElementById('search-results').classList.remove('open')">✕</button><div id="search-result-box"></div></div></div>
+
+<main>
+
+  <!-- HERO -->
+  <section class="about-hero">
+    <div class="about-hero-inner">
+      <div class="about-hero-badge">✦ Est. 2020 · Gandhinagar, India</div>
+      <h1>Crafted With<br/><em>Passion</em>, Built to Last</h1>
+      <p>We're BAGORA — a premium bag brand from the heart of Gujarat, India. Every bag we make carries our commitment to quality, style, and value.</p>
+    </div>
+  </section>
+
+  <!-- STATS BAR -->
+  <div class="stats-bar">
+    <div class="stat-cell"><div class="stat-num">50K+</div><div class="stat-lbl">Happy Customers</div></div>
+    <div class="stat-cell"><div class="stat-num">200+</div><div class="stat-lbl">Bag Styles</div></div>
+    <div class="stat-cell"><div class="stat-num">4.9★</div><div class="stat-lbl">Avg. Rating</div></div>
+    <div class="stat-cell"><div class="stat-num">5+</div><div class="stat-lbl">Years in Business</div></div>
+  </div>
+
+  <!-- OUR STORY -->
+  <div style="background:#fff;">
+    <div class="about-story">
+      <div class="story-text">
+        <h2>Our <em>Story</em></h2>
+        <p>BAGORA was born in 2020 in a small workshop in Gandhinagar, Gujarat, with just three craftspeople and one mission — to make premium-quality bags accessible to everyone in India.</p>
+        <p>We noticed a gap in the market: beautiful, durable bags were either too expensive or poorly made. We set out to change that, spending months sourcing the finest materials, refining designs, and perfecting construction techniques.</p>
+        <p>Today, BAGORA serves over 50,000 customers across India, offering everything from everyday backpacks to stylish travel bags — each made with the same care and passion as that very first bag.</p>
+        <a href="products.html" class="btn btn-brown" style="margin-top:8px;display:inline-block;padding:13px 28px;font-weight:700;">Shop Our Collection →</a>
+      </div>
+      <div>
+        <div class="story-img-grid">
+          <img src="images/ADVENTURE_HIKING_BAG.jpg" alt="Adventure Hiking Pack"/>
+          <img src="images/urban_bag.jpg" alt="Urban Backpack"/>
+          <img src="images/CLASSIC_TOTE_BAG.jpg" alt="Classic Leather Tote"/>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FULL COLLECTION SHOWCASE -->
+  <section class="collection-section">
+    <div style="text-align:center;margin-bottom:40px;">
+      <h2 class="section-title">Our Complete Collection</h2>
+      <div class="section-line"></div>
+      <p style="font-size:13px;color:var(--gray);margin-top:8px;">10 unique styles, crafted for every journey</p>
+    </div>
+    <div class="collection-grid">
+      <a href="urban_bag.html" class="col-item">
+        <img src="images/urban_bag.jpg" alt="Urban Backpack"/>
+        <div class="col-item-overlay"><div class="col-item-name">Urban Backpack</div><div class="col-item-price">₹1,299</div></div>
+      </a>
+      <a href="YOYAGE_TRAVEL_BAG.html" class="col-item">
+        <img src="images/YOYAGE_TRAVEL_BAG.jpg" alt="Voyage Travel Bag"/>
+        <div class="col-item-overlay"><div class="col-item-name">Voyage Travel Bag</div><div class="col-item-price">₹2,499</div></div>
+      </a>
+      <a href="CLASSIC_TOTE_BAG.html" class="col-item">
+        <img src="images/CLASSIC_TOTE_BAG.jpg" alt="Classic Leather Tote"/>
+        <div class="col-item-overlay"><div class="col-item-name">Classic Leather Tote</div><div class="col-item-price">₹1,899</div></div>
+      </a>
+      <a href="slimline_laptop_bag.html" class="col-item">
+        <img src="images/slimline_laptop_bag.jpg" alt="SlimLine Laptop Bag"/>
+        <div class="col-item-overlay"><div class="col-item-name">SlimLine Laptop Bag</div><div class="col-item-price">₹1,599</div></div>
+      </a>
+      <a href="MINI_CROSS_BODY_BAG.html" class="col-item">
+        <img src="images/MINI_CROSS_BODY_BAG.jpg" alt="Mini Crossbody Bag"/>
+        <div class="col-item-overlay"><div class="col-item-name">Mini Crossbody Bag</div><div class="col-item-price">₹899</div></div>
+      </a>
+      <a href="TREKKER_DUFFLE_BAG.html" class="col-item">
+        <img src="images/TREKKER_DUFFLE_BAG.jpg" alt="Trekker Duffel Bag"/>
+        <div class="col-item-overlay"><div class="col-item-name">Trekker Duffel</div><div class="col-item-price">₹1,799</div></div>
+      </a>
+      <a href="OFFICE_BRIEFCASE.html" class="col-item">
+        <img src="images/OFFICE_BRIEFCASE.jpg" alt="Office Briefcase"/>
+        <div class="col-item-overlay"><div class="col-item-name">Office Briefcase</div><div class="col-item-price">₹2,199</div></div>
+      </a>
+      <a href="CANVAS_TOTE_BAG.html" class="col-item">
+        <img src="images/CANVAS_TOTE_BAG.jpg" alt="Canvas Tote Bag"/>
+        <div class="col-item-overlay"><div class="col-item-name">Canvas Tote Bag</div><div class="col-item-price">₹599</div></div>
+      </a>
+      <a href="ADVENTURE_HIKING_BAG.html" class="col-item">
+        <img src="images/ADVENTURE_HIKING_BAG.jpg" alt="Adventure Hiking Pack"/>
+        <div class="col-item-overlay"><div class="col-item-name">Adventure Hiking Pack</div><div class="col-item-price">₹3,499</div></div>
+      </a>
+      <a href="FOLDABLE_SHOPPING_BAG.html" class="col-item">
+        <img src="images/FOLDABLE_SHOPPING_BAG.jpg" alt="Foldable Shopping Bag"/>
+        <div class="col-item-overlay"><div class="col-item-name">Foldable Shopping Bag</div><div class="col-item-price">₹399</div></div>
+      </a>
+    </div>
+  </section>
+
+  <!-- OUR VALUES -->
+  <section class="values-section">
+    <div style="text-align:center;margin-bottom:40px;">
+      <h2 class="section-title">What We Stand For</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="values-grid">
+      <div class="val-card">
+        <div class="val-icon">🏆</div>
+        <h3>Premium Quality</h3>
+        <p>Every bag is made from high-grade materials selected for durability, comfort, and lasting style. We never compromise on craftsmanship.</p>
+      </div>
+      <div class="val-card">
+        <div class="val-icon">💚</div>
+        <h3>Eco-Conscious</h3>
+        <p>We use sustainable materials wherever possible and are committed to reducing our environmental footprint with every collection we release.</p>
+      </div>
+      <div class="val-card">
+        <div class="val-icon">🤝</div>
+        <h3>Customer First</h3>
+        <p>Your satisfaction is our top priority. From easy returns to responsive support, we ensure every BAGORA experience is a great one.</p>
+      </div>
+      <div class="val-card">
+        <div class="val-icon">🇮🇳</div>
+        <h3>Made in India</h3>
+        <p>Proudly designed and crafted in Gandhinagar, Gujarat. Every purchase supports Indian artisans and local manufacturing.</p>
+      </div>
+      <div class="val-card">
+        <div class="val-icon">💰</div>
+        <h3>Fair Pricing</h3>
+        <p>Premium quality shouldn't cost a fortune. We cut out the middleman to bring you the best bags at honest, transparent prices.</p>
+      </div>
+      <div class="val-card">
+        <div class="val-icon">🚚</div>
+        <h3>Fast Delivery</h3>
+        <p>Free shipping on orders above ₹999 with 2–3 business day delivery across India. And easy 30-day returns if needed.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section class="team-section">
+    <div style="text-align:center;margin-bottom:40px;">
+      <h2 class="section-title">Meet the Team</h2>
+      <div class="section-line"></div>
+      <p style="color:rgba(255,255,255,0.5);font-size:13px;margin-top:8px;">The passionate people behind every BAGORA bag</p>
+    </div>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-av">P</div>
+        <div class="team-name">Prashant Agashe</div>
+        <div class="team-role">Founder &amp; CEO</div>
+      </div>
+      <div class="team-card">
+        <div class="team-av">K</div>
+        <div class="team-name">Krishii Patel</div>
+        <div class="team-role">Head of Design</div>
+      </div>
+      <div class="team-card">
+        <div class="team-av">V</div>
+        <div class="team-name">Vraj Patel</div>
+        <div class="team-role">Operations Lead</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="about-cta">
+    <h2>Ready to Find Your Perfect Bag?</h2>
+    <p>Browse our full collection of premium bags — handpicked for every style, every journey, every occasion.</p>
+    <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
+      <a href="products.html" class="btn btn-brown" style="padding:14px 36px;font-size:14px;font-weight:700;">Shop Now →</a>
+      <a href="contact.html" class="btn btn-outline" style="padding:14px 28px;font-size:14px;">Contact Us</a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo-name">BAGORA</div>
+      <div class="logo-tag" style="margin-bottom:10px;">Premium Bags &amp; Accessories</div>
+      <p>Your one-stop shop for premium bags — quality you can trust, prices you'll love.</p>
+    </div>
+    <div>
+      <h4>Quick Links</h4>
+      <a href="index.html">Home</a>
+      <a href="products.html">Products</a>
+      <a href="wishlist.html">Wishlist</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div>
+      <h4>Contact Info</h4>
+      <p>📍 Sector 12, Gandhinagar, Gujarat</p>
+      <p>📞 +91 98765 43210</p>
+      <p>📧 support@bagora.in</p>
+      <p>🕐 Mon–Sat: 9 AM – 7 PM</p>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2026 BAGORA – All Rights Reserved &nbsp;|&nbsp; Made with ❤️ in India</div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>

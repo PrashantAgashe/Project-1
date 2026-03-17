@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Wishlist – BAGORA</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet"/>
+  <style>
+
+    /* ── WISHLIST HERO ── */
+    .wish-hero {
+      background: linear-gradient(135deg, #1a0303 0%, #6b0f0f 45%, #c0392b 100%);
+      padding: 60px 32px 50px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .wish-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.055) 1.5px, transparent 1.5px);
+      background-size: 28px 28px;
+      pointer-events: none;
+    }
+    .wish-orb-1 {
+      position:absolute; width:300px; height:300px; border-radius:50%;
+      background:#e53e3e; opacity:0.12; filter:blur(70px);
+      top:-80px; right:-60px; pointer-events:none;
+    }
+    .wish-orb-2 {
+      position:absolute; width:200px; height:200px; border-radius:50%;
+      background:#fff; opacity:0.05; filter:blur(60px);
+      bottom:-60px; left:10%; pointer-events:none;
+    }
+    .wish-hero-inner { position:relative; z-index:2; }
+
+    /* Animated heart */
+    .wish-heart-icon {
+      display:inline-flex; align-items:center; justify-content:center;
+      width:80px; height:80px; border-radius:50%;
+      background:rgba(229,62,62,0.2);
+      border:2px solid rgba(229,62,62,0.4);
+      margin-bottom:18px;
+      animation:heartPulse 2s ease infinite;
+    }
+    @keyframes heartPulse {
+      0%,100% { transform:scale(1); box-shadow:0 0 0 0 rgba(229,62,62,0.4); }
+      50%      { transform:scale(1.06); box-shadow:0 0 0 12px rgba(229,62,62,0); }
+    }
+
+    .wish-hero h1 {
+      font-family:'Playfair Display',serif;
+      font-size: clamp(28px,5vw,48px);
+      font-weight:900; color:#fff;
+      margin-bottom:8px; line-height:1.1;
+    }
+    .wish-hero h1 em { font-style:italic; color:#ffb3b3; }
+    .wish-hero p { color:rgba(255,255,255,0.6); font-size:14px; margin-bottom:20px; }
+
+    /* Stats bar in hero */
+    .wish-stats {
+      display:inline-flex; gap:0;
+      background:rgba(255,255,255,0.08);
+      border:1px solid rgba(255,255,255,0.15);
+      border-radius:50px; overflow:hidden;
+      backdrop-filter:blur(8px);
+    }
+    .ws-item {
+      padding:10px 22px; text-align:center;
+      border-right:1px solid rgba(255,255,255,0.1);
+    }
+    .ws-item:last-child { border-right:none; }
+    .ws-num { font-size:18px; font-weight:800; color:#ffb3b3; line-height:1; }
+    .ws-lbl { font-size:9px; color:rgba(255,255,255,0.45); letter-spacing:1.5px; text-transform:uppercase; margin-top:2px; }
+
+    /* ── TOOLBAR ── */
+    .wish-toolbar {
+      display:flex; align-items:center; justify-content:space-between;
+      padding:14px 32px;
+      background:#fff; border-bottom:2px solid #f0f0f0;
+      flex-wrap:wrap; gap:10px; position:sticky; top:0; z-index:50;
+      box-shadow:0 2px 12px rgba(0,0,0,0.06);
+    }
+    .wt-left { display:flex; align-items:center; gap:12px; }
+    .wt-count {
+      font-size:13px; font-weight:700; color:var(--brown);
+      background:var(--light); padding:5px 14px; border-radius:20px;
+      border:1px solid var(--border);
+    }
+    .wt-sort {
+      font-size:12px; padding:6px 12px;
+      border:1px solid #ddd; border-radius:4px;
+      font-family:'Poppins',sans-serif; color:var(--brown);
+      outline:none; cursor:pointer; background:#fff;
+    }
+    .btn-add-all {
+      background:var(--brown); color:#fff;
+      border:none; border-radius:4px;
+      padding:8px 16px; font-size:12px; font-weight:700;
+      font-family:'Poppins',sans-serif; cursor:pointer;
+      transition:background 0.2s; display:flex; align-items:center; gap:5px;
+    }
+    .btn-add-all:hover { background:#3B1505; }
+    .btn-clear-wish {
+      background:none; border:1px solid #fcc;
+      border-radius:4px; padding:8px 14px;
+      font-family:'Poppins',sans-serif;
+      font-size:12px; color:#c53030; cursor:pointer;
+      transition:all 0.2s; font-weight:600;
+    }
+    .btn-clear-wish:hover { background:#e53e3e; color:#fff; border-color:#e53e3e; }
+
+    /* ── WISH CONTENT ── */
+    .wish-content { padding:40px 32px; background:var(--cream); min-height:300px; }
+
+    /* ── EMPTY STATE ── */
+    .wish-empty {
+      text-align:center; padding:80px 24px;
+      grid-column:1/-1;
+    }
+    .wish-empty-heart {
+      display:inline-flex; align-items:center; justify-content:center;
+      width:100px; height:100px; border-radius:50%;
+      background:#f5e6e6; margin-bottom:20px;
+      opacity:0.6;
+    }
+    .wish-empty h3 { font-size:22px; font-weight:700; color:var(--brown); margin-bottom:8px; }
+    .wish-empty p  { font-size:14px; color:var(--gray); margin-bottom:28px; max-width:340px; margin-left:auto; margin-right:auto; }
+    .wish-empty-cats {
+      display:flex; gap:10px; flex-wrap:wrap; justify-content:center; margin-top:16px;
+    }
+    .wec { 
+      padding:8px 16px; background:#fff; border:1px solid #eee; border-radius:20px;
+      font-size:12px; font-weight:600; color:var(--brown); cursor:pointer;
+      transition:all 0.2s; text-decoration:none;
+    }
+    .wec:hover { background:var(--brown); color:#fff; border-color:var(--brown); }
+
+    /* ── SUGGESTED SECTION ── */
+    .suggest-section { padding:50px 32px; background:#fff; }
+    .suggest-section .sec-hdr { text-align:center; margin-bottom:32px; }
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:600px) {
+      .wish-hero { padding:40px 16px 36px; }
+      .wish-content { padding:24px 16px; }
+      .wish-toolbar { padding:12px 16px; }
+      .ws-item { padding:8px 14px; }
+      .suggest-section { padding:36px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- PAGE LOADER -->
+<div id="page-loader">
+  <div class="loader-logo">BAGORA</div>
+  <div class="loader-tagline">Premium Bags &amp; Accessories</div>
+  <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="header-top">
+    <a href="index.html" class="logo">
+      <div class="logo-name">BAGORA</div>
+      <div class="logo-tag">Premium Bags &amp; Accessories</div>
+    </a>
+    <div class="header-right">
+      <div class="search-bar">
+        <input type="text" id="search-input" placeholder="Search: backpack, leather, travel…"/>
+        <button id="search-btn">🔍</button>
+      </div>
+      <a href="wishlist.html" class="cart-btn wish-btn">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style="flex-shrink:0">
+          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+        </svg>
+        Wishlist <span class="wish-count wish-badge">0</span>
+      </a>
+      <a href="cart.html" class="cart-btn">🛍 Cart <span class="cart-count">0</span></a>
+    </div>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html">Home</a>
+  <a href="products.html">Products</a>
+  <a href="wishlist.html" class="nav-wish">Wishlist</a>
+  <a href="about.html">About</a>
+  <a href="contact.html">Contact</a>
+  <a href="login.html">Login</a>
+  <a href="register.html">Register</a>
+</nav>
+
+<!-- SEARCH OVERLAY -->
+<div id="search-results">
+  <div class="search-box">
+    <button class="search-close" onclick="document.getElementById('search-results').classList.remove('open')">✕</button>
+    <div id="search-result-box"></div>
+  </div>
+</div>
+
+<main>
+
+  <!-- HERO -->
+  <section class="wish-hero">
+    <div class="wish-orb-1"></div>
+    <div class="wish-orb-2"></div>
+    <div class="wish-hero-inner">
+      <div class="wish-heart-icon">
+        <svg viewBox="0 0 24 24" width="38" height="38" fill="#e53e3e">
+          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+        </svg>
+      </div>
+      <h1>My <em>Wishlist</em></h1>
+      <p>All the bags you've loved — saved in one place</p>
+      <div class="wish-stats" id="wish-stats">
+        <div class="ws-item"><div class="ws-num" id="wish-hero-count">0</div><div class="ws-lbl">Saved Items</div></div>
+        <div class="ws-item"><div class="ws-num" id="wish-hero-total">₹0</div><div class="ws-lbl">Total Value</div></div>
+        <div class="ws-item"><div class="ws-num" id="wish-hero-saving">₹0</div><div class="ws-lbl">You Save</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TOOLBAR -->
+  <div class="wish-toolbar" id="wish-toolbar" style="display:none;">
+    <div class="wt-left">
+      <span class="wt-count" id="wish-count-label">0 items</span>
+      <select class="wt-sort" id="wish-sort" onchange="renderWishlistPage()">
+        <option value="default">Sort: Default</option>
+        <option value="price-low">Price: Low → High</option>
+        <option value="price-high">Price: High → Low</option>
+        <option value="name">Name A–Z</option>
+      </select>
+    </div>
+    <div style="display:flex;gap:8px;">
+      <button class="btn-add-all" onclick="addAllToCart()">🛍 Add All to Cart</button>
+      <button class="btn-clear-wish" onclick="clearAllWishlist()">🗑 Clear All</button>
+    </div>
+  </div>
+
+  <!-- WISHLIST GRID -->
+  <div class="wish-content">
+    <div class="product-grid" id="wish-grid" style="max-width:1100px;margin:0 auto;"></div>
+  </div>
+
+  <!-- SUGGESTED SECTION -->
+  <section class="suggest-section" id="suggest-section" style="display:none;">
+    <div class="sec-hdr">
+      <h2 class="section-title">You Might Like These</h2>
+      <div class="section-line"></div>
+      <p style="color:var(--gray);font-size:13px;margin-top:6px;">Browse and tap ♥ on any product to add it to your wishlist</p>
+    </div>
+    <div class="product-grid" id="suggest-grid" style="max-width:1100px;margin:0 auto;"></div>
+    <div style="text-align:center;margin-top:32px;">
+      <a href="products.html" class="btn btn-brown" style="padding:13px 36px;font-size:14px;font-weight:700;">Browse All Products →</a>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo-name">BAGORA</div>
+      <div class="logo-tag" style="margin-bottom:10px;">Premium Bags &amp; Accessories</div>
+      <p>Your one-stop shop for premium bags — backpacks, handbags, travel bags and more.</p>
+    </div>
+    <div>
+      <h4>Quick Links</h4>
+      <a href="index.html">Home</a>
+      <a href="products.html">Products</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div>
+      <h4>Contact Info</h4>
+      <p>📍 Sector 12, Gandhinagar, Gujarat</p>
+      <p>📞 +91 98765 43210</p>
+      <p>📧 support@bagora.in</p>
+      <p>🕐 Mon–Sat: 9 AM – 7 PM</p>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2026 BAGORA – All Rights Reserved &nbsp;|&nbsp; Made with ❤️ in India</div>
+</footer>
+
+<script src="main.js"></script>
+<script>
+function getSortedWishProducts() {
+  const wishIds = getWishlist();
+  let prods = PRODUCTS.filter(p => wishIds.includes(p.id));
+  const sort = document.getElementById('wish-sort')?.value || 'default';
+  if (sort === 'price-low')  prods.sort((a,b) => a.price - b.price);
+  if (sort === 'price-high') prods.sort((a,b) => b.price - a.price);
+  if (sort === 'name')       prods.sort((a,b) => a.name.localeCompare(b.name));
+  return prods;
+}
+
+function renderWishlistPage() {
+  const wishIds = getWishlist();
+  const grid    = document.getElementById('wish-grid');
+  const label   = document.getElementById('wish-count-label');
+  const toolbar = document.getElementById('wish-toolbar');
+  const suggest = document.getElementById('suggest-section');
+
+  // Update hero stats
+  const totalVal  = PRODUCTS.filter(p => wishIds.includes(p.id)).reduce((s,p) => s + p.price, 0);
+  const totalSave = PRODUCTS.filter(p => wishIds.includes(p.id)).reduce((s,p) => s + (p.old ? p.old - p.price : 0), 0);
+  document.getElementById('wish-hero-count').textContent = wishIds.length;
+  document.getElementById('wish-hero-total').textContent = '₹' + totalVal.toLocaleString();
+  document.getElementById('wish-hero-saving').textContent = totalSave > 0 ? '₹' + totalSave.toLocaleString() : '₹0';
+
+  if (wishIds.length === 0) {
+    label.textContent = '0 items';
+    toolbar.style.display = 'none';
+    grid.innerHTML = `
+      <div class="wish-empty">
+        <div class="wish-empty-heart">
+          <svg viewBox="0 0 24 24" width="46" height="46" fill="#e0a0a0">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+          </svg>
+        </div>
+        <h3>Your wishlist is empty</h3>
+        <p>Browse our collection and tap the ♥ heart button on any product to save it here for later.</p>
+        <a href="products.html" class="btn btn-brown" style="padding:12px 30px;font-size:14px;font-weight:700;">Start Browsing →</a>
+        <div class="wish-empty-cats">
+          <a href="products.html?cat=Backpacks" class="wec">🎒 Backpacks</a>
+          <a href="products.html?cat=Travel"    class="wec">🧳 Travel</a>
+          <a href="products.html?cat=Handbags"  class="wec">👜 Handbags</a>
+          <a href="products.html?cat=Laptop"    class="wec">💼 Laptop</a>
+          <a href="products.html?cat=Totes"     class="wec">🛍 Totes</a>
+        </div>
+      </div>`;
+    suggest.style.display = 'block';
+    document.getElementById('suggest-grid').innerHTML =
+      PRODUCTS.slice(0, 4).map(buildProductCard).join('');
+  } else {
+    const prods = getSortedWishProducts();
+    label.textContent = wishIds.length + ' item' + (wishIds.length > 1 ? 's' : '');
+    toolbar.style.display = 'flex';
+    grid.innerHTML = prods.map(buildProductCard).join('');
+    suggest.style.display = 'none';
+  }
+}
+
+function addAllToCart() {
+  const wishIds = getWishlist();
+  if (!wishIds.length) return;
+  wishIds.forEach(id => addToCart(id, 1));
+  showToast('🛍 All ' + wishIds.length + ' items added to cart!');
+}
+
+function clearAllWishlist() {
+  if (!confirm('Remove all ' + getWishlist().length + ' liked items?')) return;
+  localStorage.removeItem('bagora_wish');
+  refreshWishCount();
+  renderWishlistPage();
+  showToast('💔 Wishlist cleared');
+}
+
+document.addEventListener('DOMContentLoaded', renderWishlistPage);
+</script>
+</body>
+</html>
